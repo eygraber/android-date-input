@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="date_input_view_month_hint">Mes</string>
+  <string name="date_input_view_month_placeholder">Selecciona un mes</string>
+  <string name="date_input_view_day_hint">Día</string>
+  <string name="date_input_view_year_hint">Año</string>
+</resources>

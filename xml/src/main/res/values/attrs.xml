@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <attr name="dateInputViewStyle" format="reference" />
+  <attr name="textInputExposedDropdownMenuStyle" format="reference" />
+
+  <declare-styleable name="DateInputView">
+    <attr name="date_input_view_month_hint" format="string" />
+    <attr name="date_input_view_month_placeholder" format="string" />
+    <attr name="date_input_view_day_hint" format="string" />
+    <attr name="date_input_view_year_hint" format="string" />
+
+    <attr name="date_input_view_error_text" format="string" />
+
+    <attr name="date_input_view_error_margin_start" format="dimension" />
+
+    <attr name="date_input_view_month_names" format="reference" />
+  </declare-styleable>
+</resources>
