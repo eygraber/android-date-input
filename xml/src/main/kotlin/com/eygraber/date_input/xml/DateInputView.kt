@@ -3,13 +3,11 @@ package com.eygraber.date_input.xml
 import android.content.Context
 import android.text.InputFilter
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -26,23 +24,7 @@ internal class DateInputMonthView @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.attr.textInputExposedDropdownMenuStyle
 ) : TextInputLayout(
-  ContextThemeWrapper(
-    context,
-    context.obtainStyledAttributes(intArrayOf(R.attr.dateInputViewStyle)).use {
-      if(it.getResourceId(0, 0) == 0) {
-        val tv = TypedValue()
-        if(context.theme.resolveAttribute(R.attr.textInputExposedDropdownMenuStyle, tv, true)) {
-          tv.resourceId
-        }
-        else {
-          it.getResourceId(0, R.style.Widget_DateInputView)
-        }
-      }
-      else {
-        it.getResourceId(0, R.style.Widget_DateInputView)
-      }
-    }
-  ),
+  context.createWrapper(R.attr.textInputExposedDropdownMenuStyle),
   attrs,
   defStyleAttr
 )
@@ -52,23 +34,7 @@ internal class DateInputTextLayoutView @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.attr.textInputStyle
 ) : TextInputLayout(
-  ContextThemeWrapper(
-    context,
-    context.obtainStyledAttributes(intArrayOf(R.attr.dateInputViewStyle)).use {
-      if(it.getResourceId(0, 0) == 0) {
-        val tv = TypedValue()
-        if(context.theme.resolveAttribute(R.attr.textInputStyle, tv, true)) {
-          tv.resourceId
-        }
-        else {
-          it.getResourceId(0, R.style.Widget_DateInputView)
-        }
-      }
-      else {
-        it.getResourceId(0, R.style.Widget_DateInputView)
-      }
-    }
-  ),
+  context.createWrapper(R.attr.textInputStyle),
   attrs,
   defStyleAttr
 )
