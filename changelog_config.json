@@ -1,8 +1,8 @@
 {
   "categories": [
     {
-      "title": "## 🚀 Features",
-      "labels": ["feature"]
+      "title": "## 🚀 Features & Enhancements",
+      "labels": ["feature", "enhancement"]
     },
     {
       "title": "## ⚙️ Chores",
