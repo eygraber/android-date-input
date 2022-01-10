@@ -41,6 +41,22 @@ android {
   }
 }
 
+kotlin {
+  jvmToolchain {
+    require(this is JavaToolchainSpec)
+    languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get()))
+    vendor.set(JvmVendorSpec.AZUL)
+  }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+  kotlinOptions {
+    jvmTarget = libs.versions.jdk.get()
+
+    allWarningsAsErrors = true
+  }
+}
+
 dependencies {
   implementation(libs.androidx.constraintLayout)
   implementation(libs.androidx.core.ktx)
