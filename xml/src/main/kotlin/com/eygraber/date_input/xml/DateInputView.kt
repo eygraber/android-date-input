@@ -104,7 +104,7 @@ class DateInputView @JvmOverloads constructor(
       )
     }.getOrNull()
       ?.takeIf {
-        val isEqualToOrGreaterThanMin = it >= LocalDate.of(1980, 1, 1)
+        val isEqualToOrGreaterThanMin = minDate == null || it >= minDate
         val isEqualToOrLessThanMax = maxDate == null || it <= maxDate
         isEqualToOrGreaterThanMin && isEqualToOrLessThanMax
       }
