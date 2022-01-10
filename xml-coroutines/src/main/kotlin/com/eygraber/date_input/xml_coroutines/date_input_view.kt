@@ -1,10 +1,12 @@
 package com.eygraber.date_input.xml_coroutines
 
 import com.eygraber.date_input.xml.DateInputView
+import com.eygraber.date_input.xml.DateResult
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.map
 
-fun DateInputView.dateInputChangeFlow() = callbackFlow {
+fun DateInputView.dateChangeFlow() = callbackFlow {
   val listener = DateInputView.OnDateChangedListener { date ->
     trySend(date)
   }
@@ -14,4 +16,18 @@ fun DateInputView.dateInputChangeFlow() = callbackFlow {
   awaitClose {
     removeOnDateChangedListener(listener)
   }
+}
+
+fun DateInputView.dateChangeOrNullFlow() = callbackFlow {
+  val listener = DateInputView.OnDateChangedListener { date ->
+    trySend(date)
+  }
+
+  addOnDateChangedListener(listener)
+
+  awaitClose {
+    removeOnDateChangedListener(listener)
+  }
+}.map { result ->
+  (result as? DateResult.Success)?.date
 }
