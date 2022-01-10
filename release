@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+./gradlew :xml:clean :xml:build :xml:publish $@ --no-daemon --no-parallel && \
+./gradlew :xml-coroutines:clean :xml-coroutines:build :xml-coroutines:publish $@ --no-daemon --no-parallel

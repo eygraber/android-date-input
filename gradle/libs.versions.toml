@@ -1,0 +1,68 @@
+[versions]
+android-plugin = "7.2.0-alpha06"
+
+android-sdk-compile = "31"
+android-sdk-min = "24"
+android-sdk-target = "31"
+
+androidx-activity = "1.4.0"
+androidx-appCompat = "1.4.0"
+androidx-core = "1.8.0-alpha02"
+androidx-fragment = "1.4.0"
+androidx-test = "1.4.1-alpha03"
+
+detekt = "1.19.0"
+detektEygraber = "1.0.10"
+
+jdk = "11"
+
+kotlin = "1.6.10"
+
+kotlinx-coroutines = "1.6.0"
+
+versionPlugin = "0.39.0"
+
+[plugins]
+androidApp = { id = "com.android.application", version.ref = "android-plugin" }
+androidLibrary = { id = "com.android.library", version.ref = "android-plugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+publish = { id = "com.vanniktech.maven.publish", version = "0.18.0" }
+versionsBenManes = { id = "com.github.ben-manes.versions", version.ref = "versionPlugin" }
+
+[libraries]
+android-desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
+
+androidx-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity" }
+androidx-annotations = "androidx.annotation:annotation:1.4.0-alpha01"
+androidx-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appCompat" }
+androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+
+buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "android-plugin" }
+buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
+detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
+
+google-material = "com.google.android.material:material:1.5.0-rc01"
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+
+test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
+test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+test-espressoCore = "androidx.test.espresso:espresso-core:3.5.0-alpha03"
+test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-fragment" }
+test-junit = "androidx.test.ext:junit:1.1.4-alpha03"
+test-kotest = "io.kotest:kotest-assertions-core:5.0.2"
+test-robolectric = "org.robolectric:robolectric:4.7.3"
+test-mockk = "io.mockk:mockk:1.12.1"
+test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
+test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
+
+[bundles]
+test = ["test-core", "test-coroutines", "test-espressoCore", "test-fragment", "test-junit", "test-kotest", "test-mockk", "test-robolectric", "test-rules", "test-runner"]

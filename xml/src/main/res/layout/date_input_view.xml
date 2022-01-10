@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:paddingHorizontal="24dp"
+  tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+  <androidx.constraintlayout.helper.widget.Flow
+    android:id="@+id/date_flow"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:constraint_referenced_ids="monthContainer,dayContainer,yearContainer"
+    app:flow_horizontalStyle="spread_inside"
+    app:flow_horizontalBias="0"
+    app:flow_wrapMode="chain" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/monthContainer"
+    style="?attr/textInputOutlinedExposedDropdownMenuStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/dayContainer"
+    app:layout_constraintHorizontal_chainStyle="spread"
+    app:layout_constrainedWidth="true"
+    tools:hint="@string/date_input_view_month_hint"
+    app:errorIconDrawable="@null"
+    app:expandedHintEnabled="false">
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+      android:id="@+id/month"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="none"
+      tools:hint="@string/date_input_view_month_placeholder" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/dayContainer"
+    style="?attr/textInputOutlinedDenseStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/monthContainer"
+    app:layout_constraintEnd_toStartOf="@+id/yearContainer"
+    app:layout_constrainedWidth="true"
+    android:minWidth="60dp"
+    tools:hint="@string/date_input_view_day_hint"
+    app:errorIconDrawable="@null"
+    app:expandedHintEnabled="false">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/day"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      tools:text="1"
+      android:importantForAutofill="no" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/yearContainer"
+    style="?attr/textInputOutlinedDenseStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/dayContainer"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constrainedWidth="true"
+    android:minWidth="75dp"
+    tools:hint="@string/date_input_view_year_hint"
+    app:errorIconDrawable="@null"
+    app:expandedHintEnabled="false">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/year"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      tools:text="1996"
+      android:importantForAutofill="no" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+    android:id="@+id/error"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/date_flow"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginStart="16dp"
+    android:textAppearance="?attr/textAppearanceCaption"
+    android:textColor="?colorError"
+    tools:text="Please enter a valid date" />
+</merge>
