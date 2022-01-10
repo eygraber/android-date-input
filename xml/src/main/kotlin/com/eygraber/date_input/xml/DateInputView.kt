@@ -73,6 +73,22 @@ internal class DateInputTextLayoutView @JvmOverloads constructor(
   defStyleAttr
 )
 
+sealed interface DateResult {
+  data class Success(val date: LocalDate) : DateResult
+  data class Error(val error: Throwable) : DateResult
+
+  data class ViolatedMinDate(val date: LocalDate, val minDate: LocalDate) : DateResult
+  data class ViolatedMaxDate(val date: LocalDate, val maxDate: LocalDate) : DateResult
+
+  object RequiresDay : DateResult
+  object RequiresYear : DateResult
+
+  fun getOrNull() = when(this) {
+    is Success -> date
+    else -> null
+  }
+}
+
 class DateInputView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
@@ -80,7 +96,7 @@ class DateInputView @JvmOverloads constructor(
   defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
   fun interface OnDateChangedListener {
-    fun onDateChanged(date: LocalDate?)
+    fun onDateChanged(dateChangeResult: DateResult)
   }
 
   private val monthContainerView: TextInputLayout
@@ -95,31 +111,56 @@ class DateInputView @JvmOverloads constructor(
 
   private var selectedMonth = INVALID_MONTH
 
+  val selectedDateResult: DateResult
+    get() {
+      val day = dayView.text.toString().toIntOrNull()
+      val year = yearView.text.toString().toIntOrNull()
+
+      return when {
+        day == null -> DateResult.RequiresDay
+        year == null -> DateResult.RequiresYear
+        else -> runCatching {
+          LocalDate.of(
+            year, selectedMonth, day
+          )
+        }.let { result ->
+          when(val date = result.getOrNull()) {
+            null -> DateResult.Error(result.exceptionOrNull() ?: RuntimeException())
+            else -> {
+              val minDate = minDate
+              val maxDate = maxDate
+              when {
+                minDate != null && date < minDate -> DateResult.ViolatedMinDate(date, minDate)
+                maxDate != null && date > maxDate -> DateResult.ViolatedMaxDate(date, maxDate)
+                else -> DateResult.Success(date)
+              }
+            }
+          }
+        }
+      }
+    }
+
   var selectedDate: LocalDate?
-    get() = runCatching {
-      LocalDate.of(
-        yearView.text.toString().toIntOrNull() ?: error("A year needs to be set"),
-        selectedMonth,
-        dayView.text.toString().toIntOrNull() ?: error("A day needs to be set")
-      )
-    }.getOrNull()
-      ?.takeIf {
-        val isEqualToOrGreaterThanMin = minDate == null || it >= minDate
-        val isEqualToOrLessThanMax = maxDate == null || it <= maxDate
-        isEqualToOrGreaterThanMin && isEqualToOrLessThanMax
-      }
+    get() = selectedDateResult.getOrNull()
     set(value) {
-      if(value == null) {
-        errorView.text = null
-        errorView.isVisible = false
-        monthView.text = null
-        dayView.text = null
-        yearView.text = null
+      try {
+        suppressChangeNotifications = true
+
+        if(value == null) {
+          errorView.text = null
+          errorView.isVisible = false
+          monthView.text = null
+          dayView.text = null
+          yearView.text = null
+        }
+        else {
+          monthView.listSelection = value.monthValue
+          dayView.text = value.dayOfMonth.toString()
+          yearView.text = value.year.toString()
+        }
       }
-      else {
-        monthView.listSelection = value.monthValue
-        dayView.text = value.dayOfMonth.toString()
-        yearView.text = value.year.toString()
+      finally {
+        suppressChangeNotifications = false
       }
     }
 
@@ -144,8 +185,11 @@ class DateInputView @JvmOverloads constructor(
     dateChangedListeners -= dateChangedListener
   }
 
+  private var suppressChangeNotifications = false
   private fun notifyDateChangedListeners() {
-    val date = selectedDate
+    if(suppressChangeNotifications) return
+
+    val date = selectedDateResult
     for(listener in dateChangedListeners) {
       listener.onDateChanged(date)
     }
