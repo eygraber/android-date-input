@@ -15,8 +15,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:constraint_referenced_ids="monthContainer,dayContainer,yearContainer"
-    app:flow_horizontalStyle="spread_inside"
-    app:flow_horizontalBias="0"
+    tools:flow_horizontalStyle="spread_inside"
     app:flow_wrapMode="chain" />
 
   <com.eygraber.date_input.xml.DateInputMonthView
