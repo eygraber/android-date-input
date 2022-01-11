@@ -9,6 +9,14 @@ plugins {
 android {
   compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
+  buildFeatures {
+    compose = true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = libs.versions.jetpack.compose.compiler.get()
+  }
+
   defaultConfig {
     applicationId = "com.eygraber.date_input"
     minSdk = libs.versions.android.sdk.min.get().toInt()
@@ -52,7 +60,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 dependencies {
   coreLibraryDesugaring(libs.android.desugar)
 
+  implementation(projects.common)
+  implementation(projects.compose)
   implementation(projects.xml)
+
+  implementation(libs.jetpack.compose.material)
+  implementation(libs.jetpack.compose.themeAdapter)
 
   implementation(libs.androidx.appCompat)
   implementation(libs.androidx.constraintLayout)
