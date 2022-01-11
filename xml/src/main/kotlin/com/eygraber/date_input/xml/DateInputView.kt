@@ -12,55 +12,33 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
+import com.eygraber.date_input.common.DateResult
+import com.eygraber.date_input.common.generateLocalizedMonthNames
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalDate
-import java.time.Month
-import java.time.format.TextStyle
-import java.util.Locale
 import java.util.concurrent.CopyOnWriteArrayList
+import com.eygraber.date_input.common.R as commonR
 
 internal class DateInputMonthView @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.textInputExposedDropdownMenuStyle
+  attrs: AttributeSet? = null
 ) : TextInputLayout(
   context.createWrapper(R.attr.textInputExposedDropdownMenuStyle),
-  attrs,
-  defStyleAttr
+  attrs
 )
 
 internal class DateInputTextLayoutView @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.textInputStyle
+  attrs: AttributeSet? = null
 ) : TextInputLayout(
   context.createWrapper(R.attr.textInputStyle),
-  attrs,
-  defStyleAttr
+  attrs
 )
-
-sealed interface DateResult {
-  data class Success(val date: LocalDate) : DateResult
-  data class Error(val error: Throwable) : DateResult
-
-  data class ViolatedMinDate(val date: LocalDate, val minDate: LocalDate) : DateResult
-  data class ViolatedMaxDate(val date: LocalDate, val maxDate: LocalDate) : DateResult
-
-  object RequiresDay : DateResult
-  object RequiresYear : DateResult
-
-  fun getOrNull() = when(this) {
-    is Success -> date
-    else -> null
-  }
-}
 
 class DateInputView @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.dateInputViewStyle,
-  defStyleRes: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
+  attrs: AttributeSet? = null
+) : ConstraintLayout(context, attrs) {
   fun interface OnDateChangedListener {
     fun onDateChanged(dateChangeResult: DateResult)
   }
@@ -83,6 +61,7 @@ class DateInputView @JvmOverloads constructor(
       val year = yearView.text.toString().toIntOrNull()
 
       return when {
+        selectedMonth == INVALID_MONTH -> DateResult.RequiresMonth
         day == null -> DateResult.RequiresDay
         year == null -> DateResult.RequiresYear
         else -> runCatching {
@@ -120,7 +99,10 @@ class DateInputView @JvmOverloads constructor(
           yearView.text = null
         }
         else {
-          monthView.listSelection = value.monthValue
+          monthView.setText(
+            monthView.adapter.getItem(value.monthValue - 1).toString(),
+            false
+          )
           dayView.text = value.dayOfMonth.toString()
           yearView.text = value.year.toString()
         }
@@ -195,18 +177,18 @@ class DateInputView @JvmOverloads constructor(
 
     errorView = findViewById(R.id.error)
 
-    styledAttr(attrs, R.styleable.DateInputView, defStyleAttr, defStyleRes) {
+    styledAttr(attrs, R.styleable.DateInputView, R.attr.dateInputViewStyle) {
       monthContainerView.hint = getString(R.styleable.DateInputView_date_input_view_month_hint)
-        ?: context.getString(R.string.date_input_view_month_hint)
+        ?: context.getString(commonR.string.date_input_view_month_hint)
 
       monthView.hint = getString(R.styleable.DateInputView_date_input_view_month_placeholder)
-        ?: context.getString(R.string.date_input_view_month_placeholder)
+        ?: context.getString(commonR.string.date_input_view_month_placeholder)
 
       dayContainerView.hint = getString(R.styleable.DateInputView_date_input_view_day_hint)
-        ?: context.getString(R.string.date_input_view_day_hint)
+        ?: context.getString(commonR.string.date_input_view_day_hint)
 
       yearContainerView.hint = getString(R.styleable.DateInputView_date_input_view_year_hint)
-        ?: context.getString(R.string.date_input_view_year_hint)
+        ?: context.getString(commonR.string.date_input_view_year_hint)
 
       error = getString(R.styleable.DateInputView_date_input_view_error_text)
       getDimensionPixelSize(R.styleable.DateInputView_date_input_view_error_margin_start, -1).let { margin ->
@@ -219,7 +201,10 @@ class DateInputView @JvmOverloads constructor(
 
       monthView.apply {
         val monthNames =
-          when(val resId = getResourceId(R.styleable.DateInputView_date_input_view_month_names, -1)) {
+          when(
+            val resId =
+              getResourceId(R.styleable.DateInputView_date_input_view_month_names, -1)
+          ) {
             -1 -> generateLocalizedMonthNames()
             else -> resources.getStringArray(resId).toList()
           }
@@ -232,16 +217,6 @@ class DateInputView @JvmOverloads constructor(
   }
 
   companion object {
-    private fun generateLocalizedMonthNames() =
-      (1..12).map { month ->
-        Month
-          .of(month)
-          .getDisplayName(
-            TextStyle.FULL,
-            Locale.getDefault()
-          )
-      }
-
     private const val INVALID_MONTH = -1
 
     private val OnlyDigitsFilter = InputFilter { source, start, end, _, _, _ ->

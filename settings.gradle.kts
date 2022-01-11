@@ -22,6 +22,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "date_input"
 include(":app")
+include(":common")
+include(":compose")
 include(":xml")
 include(":xml-coroutines")
 

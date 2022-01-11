@@ -11,6 +11,14 @@ plugins {
 android {
   compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
+  buildFeatures {
+    compose = true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = libs.versions.jetpack.compose.compiler.get()
+  }
+
   defaultConfig {
     consumerProguardFile(project.file("consumer-rules.pro"))
 
@@ -54,6 +62,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     jvmTarget = libs.versions.jdk.get()
 
     allWarningsAsErrors = true
+    freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
   }
 }
 
@@ -62,9 +71,10 @@ dependencies {
 
   implementation(projects.common)
 
-  implementation(libs.androidx.constraintLayout)
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.google.material)
+  implementation(libs.accompanist.flow)
+  implementation(libs.androidx.activity)
+  implementation(libs.jetpack.compose.material)
+  implementation(libs.jetpack.compose.tooling)
 
   detektPlugins(libs.detekt)
   detektPlugins(libs.detektEygraber.formatting)

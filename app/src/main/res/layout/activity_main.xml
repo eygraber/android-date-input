@@ -13,8 +13,28 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp" />
+    android:layout_marginTop="24dp"
+    android:layout_marginHorizontal="16dp" />
+
+  <com.eygraber.date_input.xml.DateInputView
+    android:id="@+id/outlined_date_input_view"
+    android:theme="@style/Widget.DateInputView.Outlined"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/date_input_view"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginHorizontal="16dp" />
+
+  <androidx.compose.ui.platform.ComposeView
+    android:id="@+id/date_input_composable"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/outlined_date_input_view"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginHorizontal="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

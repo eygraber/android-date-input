@@ -1,4 +1,6 @@
 [versions]
+accompanist = "0.22.0-rc"
+
 android-plugin = "7.2.0-alpha06"
 
 android-sdk-compile = "31"
@@ -16,6 +18,10 @@ detektEygraber = "1.0.10"
 
 jdk = "11"
 
+jetbrains-compose = "1.0.1"
+jetpack-compose = "1.1.0-rc01"
+jetpack-compose-compiler = "1.1.0-rc02"
+
 kotlin = "1.6.10"
 
 kotlinx-coroutines = "1.6.0"
@@ -25,12 +31,15 @@ versionPlugin = "0.39.0"
 [plugins]
 androidApp = { id = "com.android.application", version.ref = "android-plugin" }
 androidLibrary = { id = "com.android.library", version.ref = "android-plugin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 publish = { id = "com.vanniktech.maven.publish", version = "0.18.0" }
 versionsBenManes = { id = "com.github.ben-manes.versions", version.ref = "versionPlugin" }
 
 [libraries]
+accompanist-flow = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 android-desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
 
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity" }
@@ -39,6 +48,11 @@ androidx-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "a
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
 androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+
+jetpack-compose-compiler = { module = "androidx.compose.ui:ui-tooling", version.ref = "jetpack-compose-compiler" }
+jetpack-compose-material = { module = "androidx.compose.material:material", version.ref = "jetpack-compose" }
+jetpack-compose-themeAdapter = { module = "com.google.android.material:compose-theme-adapter", version = "1.1.2" }
+jetpack-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "jetpack-compose" }
 
 buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "android-plugin" }
 buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
