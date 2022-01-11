@@ -60,7 +60,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 dependencies {
   coreLibraryDesugaring(libs.android.desugar)
 
-  implementation(projects.common)
+  api(projects.common)
 
   implementation(libs.androidx.constraintLayout)
   implementation(libs.androidx.core.ktx)
