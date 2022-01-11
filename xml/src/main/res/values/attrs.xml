@@ -14,5 +14,14 @@
     <attr name="date_input_view_error_margin_start" format="dimension" />
 
     <attr name="date_input_view_month_names" format="reference" />
+
+    <attr name="date_input_view_flow_style" format="enum">
+      <enum name="spread" value="0"/>
+      <enum name="spread_inside" value="1"/>
+      <enum name="packed" value="2"/>
+    </attr>
+
+    <attr name="date_input_view_horizontal_gap" format="dimension" />
+    <attr name="date_input_view_vertical_gap" format="dimension" />
   </declare-styleable>
 </resources>

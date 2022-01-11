@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
+import androidx.constraintlayout.helper.widget.Flow
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -43,6 +44,7 @@ class DateInputView @JvmOverloads constructor(
     fun onDateChanged(dateChangeResult: DateResult)
   }
 
+  private val flowView: Flow
   private val monthContainerView: TextInputLayout
   private val monthView: AutoCompleteTextView
   private val dayContainerView: TextInputLayout
@@ -128,6 +130,7 @@ class DateInputView @JvmOverloads constructor(
       .from(context)
       .inflate(R.layout.date_input_view, this, true)
 
+    flowView = findViewById(R.id.date_flow)
     monthContainerView = findViewById(R.id.monthContainer)
     dayContainerView = findViewById(R.id.dayContainer)
     yearContainerView = findViewById(R.id.yearContainer)
@@ -158,6 +161,26 @@ class DateInputView @JvmOverloads constructor(
     errorView = findViewById(R.id.error)
 
     styledAttr(attrs, R.styleable.DateInputView, R.attr.dateInputViewStyle) {
+      val horizontalGap = getDimensionPixelSize(
+        R.styleable.DateInputView_date_input_view_horizontal_gap,
+        -1
+      )
+      if(horizontalGap > -1) {
+        flowView.setHorizontalGap(horizontalGap)
+      }
+
+      val verticalGap = getDimensionPixelSize(
+        R.styleable.DateInputView_date_input_view_vertical_gap,
+        -1
+      )
+      if(verticalGap > -1) {
+        flowView.setVerticalGap(verticalGap)
+      }
+
+      flowView.setHorizontalStyle(
+        getInt(R.styleable.DateInputView_date_input_view_flow_style, Flow.CHAIN_SPREAD_INSIDE)
+      )
+
       monthContainerView.hint = getString(R.styleable.DateInputView_date_input_view_month_hint)
         ?: context.getString(commonR.string.date_input_view_month_hint)
 
