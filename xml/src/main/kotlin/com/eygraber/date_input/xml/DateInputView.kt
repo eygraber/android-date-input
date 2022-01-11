@@ -177,8 +177,20 @@ class DateInputView @JvmOverloads constructor(
         flowView.setVerticalGap(verticalGap)
       }
 
+      flowView.setHorizontalBias(
+        getFloat(R.styleable.DateInputView_date_input_view_horizontal_bias, 0F)
+      )
+
+      flowView.setVerticalBias(
+        getFloat(R.styleable.DateInputView_date_input_view_vertical_bias, 0F)
+      )
+
       flowView.setHorizontalStyle(
         getInt(R.styleable.DateInputView_date_input_view_flow_style, Flow.CHAIN_SPREAD_INSIDE)
+      )
+
+      flowView.setHorizontalAlign(
+        getInt(R.styleable.DateInputView_date_input_view_flow_align, Flow.HORIZONTAL_ALIGN_START)
       )
 
       monthContainerView.hint = getString(R.styleable.DateInputView_date_input_view_month_hint)
