@@ -2,7 +2,6 @@
   "extends": [
     "config:base"
   ],
-  "deepExtract": true,
   "enabledManagers": ["gradle"],
   "gitAuthor": "renovatebot@eygraber.com",
   "labels": ["dependencies"],
