@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.eygraber.date_input.common.DateResult
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
-import java.time.LocalDate
 
 @Composable
 internal fun MonthDayAndYear(
@@ -48,20 +47,28 @@ internal fun MonthDayAndYear(
       mutableStateOf(dateInputHolder.initialDate?.year)
     }
 
-    fun notifyDateChanged(dateResult: DateResult) {
-      onDateChanged(dateResult)
+    fun notifyDateChanged(holder: DateInputHolder) {
+      onDateChanged(
+        DateResult.calculateResult(
+          minDate = holder.minDate,
+          maxDate = holder.maxDate,
+          month = month,
+          day = day,
+          year = year
+        )
+      )
     }
 
     // calculate initial state
     LaunchedEffect(Unit) {
-      notifyDateChanged(calculateDateResult(dateInputHolder, month, day, year))
+      notifyDateChanged(dateInputHolder)
     }
 
     Month(
       month = month,
       onMonthChange = { newMonth ->
         month = newMonth
-        notifyDateChanged(calculateDateResult(dateInputHolder, month, day, year))
+        notifyDateChanged(dateInputHolder)
       },
       style = style,
       monthDisplayNames = monthDisplayNames,
@@ -74,7 +81,7 @@ internal fun MonthDayAndYear(
       value = day,
       onValueChange = { newDay ->
         day = newDay
-        notifyDateChanged(calculateDateResult(dateInputHolder, month, day, year))
+        notifyDateChanged(dateInputHolder)
       },
       style = style,
       label = dayLabel,
@@ -87,7 +94,7 @@ internal fun MonthDayAndYear(
       value = year,
       onValueChange = { newYear ->
         year = newYear
-        notifyDateChanged(calculateDateResult(dateInputHolder, month, day, year))
+        notifyDateChanged(dateInputHolder)
       },
       style = style,
       label = yearLabel,
@@ -95,34 +102,5 @@ internal fun MonthDayAndYear(
       minWidth = 75.dp,
       isError = isError
     )
-  }
-}
-
-private fun calculateDateResult(
-  holder: DateInputHolder,
-  month: Int?,
-  day: Int?,
-  year: Int?
-) = when {
-  month == null -> DateResult.RequiresMonth
-  day == null -> DateResult.RequiresDay
-  year == null -> DateResult.RequiresYear
-  else -> runCatching {
-    LocalDate.of(
-      year, month, day
-    )
-  }.let { result ->
-    when(val date = result.getOrNull()) {
-      null -> DateResult.Error(result.exceptionOrNull() ?: RuntimeException())
-      else -> {
-        val minDate = holder.minDate
-        val maxDate = holder.maxDate
-        when {
-          minDate != null && date < minDate -> DateResult.ViolatedMinDate(date, minDate)
-          maxDate != null && date > maxDate -> DateResult.ViolatedMaxDate(date, maxDate)
-          else -> DateResult.Success(date)
-        }
-      }
-    }
   }
 }

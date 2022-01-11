@@ -56,34 +56,13 @@ class DateInputView @JvmOverloads constructor(
   private var selectedMonth = INVALID_MONTH
 
   val selectedDateResult: DateResult
-    get() {
-      val day = dayView.text.toString().toIntOrNull()
-      val year = yearView.text.toString().toIntOrNull()
-
-      return when {
-        selectedMonth == INVALID_MONTH -> DateResult.RequiresMonth
-        day == null -> DateResult.RequiresDay
-        year == null -> DateResult.RequiresYear
-        else -> runCatching {
-          LocalDate.of(
-            year, selectedMonth, day
-          )
-        }.let { result ->
-          when(val date = result.getOrNull()) {
-            null -> DateResult.Error(result.exceptionOrNull() ?: RuntimeException())
-            else -> {
-              val minDate = minDate
-              val maxDate = maxDate
-              when {
-                minDate != null && date < minDate -> DateResult.ViolatedMinDate(date, minDate)
-                maxDate != null && date > maxDate -> DateResult.ViolatedMaxDate(date, maxDate)
-                else -> DateResult.Success(date)
-              }
-            }
-          }
-        }
-      }
-    }
+    get() = DateResult.calculateResult(
+      minDate = minDate,
+      maxDate = maxDate,
+      month = selectedMonth.takeIf { it != INVALID_MONTH },
+      day = dayView.text.toString().toIntOrNull(),
+      year = yearView.text.toString().toIntOrNull()
+    )
 
   var selectedDate: LocalDate?
     get() = selectedDateResult.getOrNull()
@@ -99,6 +78,7 @@ class DateInputView @JvmOverloads constructor(
           yearView.text = null
         }
         else {
+          selectedMonth = value.monthValue
           monthView.setText(
             monthView.adapter.getItem(value.monthValue - 1).toString(),
             false
