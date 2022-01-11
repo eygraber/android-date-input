@@ -3,7 +3,6 @@
     "config:base"
   ],
   "enabledManagers": ["gradle"],
-  "gitAuthor": "renovatebot@eygraber.com",
   "labels": ["dependencies"],
   "prHourlyLimit": 3
 }
