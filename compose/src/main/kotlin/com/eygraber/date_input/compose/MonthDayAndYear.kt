@@ -86,7 +86,7 @@ internal fun MonthDayAndYear(
       style = style,
       label = dayLabel,
       maxLength = 2,
-      minWidth = 68.dp,
+      minWidth = 60.dp,
       isError = isError
     )
 
@@ -99,7 +99,7 @@ internal fun MonthDayAndYear(
       style = style,
       label = yearLabel,
       maxLength = 4,
-      minWidth = 75.dp,
+      minWidth = 81.dp,
       isError = isError
     )
   }
