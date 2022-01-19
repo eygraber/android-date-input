@@ -35,15 +35,15 @@ internal fun MonthDayAndYear(
     mainAxisAlignment = FlowMainAxisAlignment.Start,
     modifier = Modifier.fillMaxWidth()
   ) {
-    var month by remember {
+    var month by remember(dateInputHolder.initialDate?.monthValue) {
       mutableStateOf(dateInputHolder.initialDate?.monthValue)
     }
 
-    var day by remember {
+    var day by remember(dateInputHolder.initialDate?.dayOfMonth) {
       mutableStateOf(dateInputHolder.initialDate?.dayOfMonth)
     }
 
-    var year by remember {
+    var year by remember(dateInputHolder.initialDate?.year) {
       mutableStateOf(dateInputHolder.initialDate?.year)
     }
 
