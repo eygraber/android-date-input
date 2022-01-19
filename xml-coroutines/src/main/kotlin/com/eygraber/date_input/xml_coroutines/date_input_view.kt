@@ -6,28 +6,22 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 
-fun DateInputView.dateChangeFlow() = callbackFlow {
+fun DateInputView.dateResultChangeFlow(emitInitialValue: Boolean = true) = callbackFlow {
   val listener = DateInputView.OnDateChangedListener { date ->
     trySend(date)
   }
 
   addOnDateChangedListener(listener)
 
+  if(emitInitialValue) listener.onDateChanged(selectedDateResult)
+
   awaitClose {
     removeOnDateChangedListener(listener)
   }
 }
 
-fun DateInputView.dateChangeOrNullFlow() = callbackFlow {
-  val listener = DateInputView.OnDateChangedListener { date ->
-    trySend(date)
-  }
-
-  addOnDateChangedListener(listener)
-
-  awaitClose {
-    removeOnDateChangedListener(listener)
-  }
-}.map { result ->
-  (result as? DateResult.Success)?.date
-}
+fun DateInputView.dateChangeOrNullFlow(emitInitialValue: Boolean = true) =
+  dateResultChangeFlow(emitInitialValue)
+    .map { result ->
+      (result as? DateResult.Success)?.date
+    }
