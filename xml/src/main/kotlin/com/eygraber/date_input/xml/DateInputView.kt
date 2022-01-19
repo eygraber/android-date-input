@@ -75,6 +75,7 @@ class DateInputView @JvmOverloads constructor(
         if(value == null) {
           errorView.text = null
           errorView.isVisible = false
+          selectedMonth = INVALID_MONTH
           monthView.text = null
           dayView.text = null
           yearView.text = null
