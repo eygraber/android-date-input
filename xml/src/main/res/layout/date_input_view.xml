@@ -74,7 +74,7 @@
     app:layout_constraintStart_toEndOf="@+id/dayContainer"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constrainedWidth="true"
-    android:minWidth="75dp"
+    android:minWidth="77dp"
     tools:hint="@string/date_input_view_year_hint"
     app:errorIconDrawable="@null"
     app:expandedHintEnabled="false">
