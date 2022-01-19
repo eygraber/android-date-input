@@ -29,6 +29,9 @@
     app:layout_constraintHorizontal_chainStyle="spread"
     app:layout_constrainedWidth="true"
     tools:hint="@string/date_input_view_month_hint"
+    android:nextFocusForward="@+id/dayContainer"
+    android:nextFocusDown="@+id/dayContainer"
+    android:nextFocusRight="@+id/dayContainer"
     app:errorIconDrawable="@null"
     app:expandedHintEnabled="false">
 
@@ -52,6 +55,11 @@
     app:layout_constrainedWidth="true"
     android:minWidth="60dp"
     tools:hint="@string/date_input_view_day_hint"
+    android:nextFocusLeft="@+id/monthContainer"
+    android:nextFocusUp="@+id/monthContainer"
+    android:nextFocusForward="@+id/yearContainer"
+    android:nextFocusDown="@+id/yearContainer"
+    android:nextFocusRight="@+id/yearContainer"
     app:errorIconDrawable="@null"
     app:expandedHintEnabled="false">
 
@@ -60,6 +68,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="numberDecimal"
+      android:imeOptions="actionNext"
       tools:text="1"
       android:maxLength="2"
       android:importantForAutofill="no" />
@@ -76,6 +85,8 @@
     app:layout_constrainedWidth="true"
     android:minWidth="77dp"
     tools:hint="@string/date_input_view_year_hint"
+    android:nextFocusLeft="@+id/dayContainer"
+    android:nextFocusUp="@+id/dayContainer"
     app:errorIconDrawable="@null"
     app:expandedHintEnabled="false">
 
@@ -84,6 +95,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="numberDecimal"
+      android:imeOptions="actionNext"
       tools:text="1996"
       android:maxLength="4"
       android:importantForAutofill="no" />
