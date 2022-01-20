@@ -18,7 +18,7 @@ android {
   }
 
   defaultConfig {
-    applicationId = "com.eygraber.date_input"
+    applicationId = "com.eygraber.date_time_input"
     minSdk = libs.versions.android.sdk.min.get().toInt()
     targetSdk = libs.versions.android.sdk.target.get().toInt()
     versionCode = 1

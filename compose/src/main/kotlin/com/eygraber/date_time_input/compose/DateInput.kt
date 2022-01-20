@@ -1,12 +1,12 @@
-package com.eygraber.date_input.compose
+package com.eygraber.date_time_input.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
-import com.eygraber.date_input.common.DateResult
-import com.eygraber.date_input.common.generateLocalizedMonthNames
+import com.eygraber.date_time_input.common.DateResult
+import com.eygraber.date_time_input.common.generateLocalizedMonthNames
 
 enum class DateInputStyle {
   Filled,

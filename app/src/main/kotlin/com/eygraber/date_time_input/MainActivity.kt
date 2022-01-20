@@ -1,4 +1,4 @@
-package com.eygraber.date_input
+package com.eygraber.date_time_input
 
 import android.os.Bundle
 import androidx.annotation.IdRes
@@ -15,11 +15,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
-import com.eygraber.date_input.common.DateResult
-import com.eygraber.date_input.compose.DateInput
-import com.eygraber.date_input.compose.DateInputHolder
-import com.eygraber.date_input.compose.DateInputStyle
-import com.eygraber.date_input.xml.DateInputView
+import com.eygraber.date_time_input.common.DateResult
+import com.eygraber.date_time_input.compose.DateInput
+import com.eygraber.date_time_input.compose.DateInputHolder
+import com.eygraber.date_time_input.compose.DateInputStyle
+import com.eygraber.date_time_input.xml.DateInputView
 import com.google.android.material.composethemeadapter.MdcTheme
 import java.time.LocalDate
 import java.time.Month

@@ -20,7 +20,7 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "date_input"
+rootProject.name = "date_time_input"
 include(":app")
 include(":common")
 include(":compose")

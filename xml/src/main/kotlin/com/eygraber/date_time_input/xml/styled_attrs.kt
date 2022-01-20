@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.eygraber.date_input.xml
+package com.eygraber.date_time_input.xml
 
 import android.content.Context
 import android.content.res.TypedArray
