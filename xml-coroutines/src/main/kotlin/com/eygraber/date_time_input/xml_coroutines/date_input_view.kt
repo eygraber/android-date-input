@@ -1,7 +1,7 @@
-package com.eygraber.date_input.xml_coroutines
+package com.eygraber.date_time_input.xml_coroutines
 
-import com.eygraber.date_input.common.DateResult
-import com.eygraber.date_input.xml.DateInputView
+import com.eygraber.date_time_input.common.DateResult
+import com.eygraber.date_time_input.xml.DateInputView
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map

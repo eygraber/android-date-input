@@ -1,4 +1,4 @@
-package com.eygraber.date_input.common
+package com.eygraber.date_time_input.common
 
 import java.time.LocalDate
 

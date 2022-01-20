@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterialApi::class)
 
-package com.eygraber.date_input.compose
+package com.eygraber.date_time_input.compose
 
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.DropdownMenuItem
@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.eygraber.date_input.common.R
+import com.eygraber.date_time_input.common.R
 
 @Composable
 internal fun Month(

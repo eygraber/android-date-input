@@ -18,7 +18,7 @@
     tools:flow_horizontalStyle="spread_inside"
     app:flow_wrapMode="chain" />
 
-  <com.eygraber.date_input.xml.DateInputMonthView
+  <com.eygraber.date_time_input.xml.DateInputMonthView
     android:id="@+id/monthContainer"
     style="?attr/textInputExposedDropdownMenuStyle"
     android:layout_width="wrap_content"
@@ -42,9 +42,9 @@
       android:inputType="none"
       tools:hint="@string/date_input_view_month_placeholder" />
 
-  </com.eygraber.date_input.xml.DateInputMonthView>
+  </com.eygraber.date_time_input.xml.DateInputMonthView>
 
-  <com.eygraber.date_input.xml.DateInputTextLayoutView
+  <com.eygraber.date_time_input.xml.DateInputTextLayoutView
     android:id="@+id/dayContainer"
     style="?attr/textInputStyle"
     android:layout_width="wrap_content"
@@ -72,9 +72,9 @@
       tools:text="1"
       android:maxLength="2"
       android:importantForAutofill="no" />
-  </com.eygraber.date_input.xml.DateInputTextLayoutView>
+  </com.eygraber.date_time_input.xml.DateInputTextLayoutView>
 
-  <com.eygraber.date_input.xml.DateInputTextLayoutView
+  <com.eygraber.date_time_input.xml.DateInputTextLayoutView
     android:id="@+id/yearContainer"
     style="?attr/textInputStyle"
     android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
       tools:text="1996"
       android:maxLength="4"
       android:importantForAutofill="no" />
-  </com.eygraber.date_input.xml.DateInputTextLayoutView>
+  </com.eygraber.date_time_input.xml.DateInputTextLayoutView>
 
   <TextView
     android:id="@+id/error"

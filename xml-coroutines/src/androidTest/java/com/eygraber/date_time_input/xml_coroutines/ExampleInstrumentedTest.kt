@@ -1,4 +1,4 @@
-package com.eygraber.date_input.xml
+package com.eygraber.date_time_input.xml_coroutines
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("com.eygraber.date_input_view.xml.test", appContext.packageName)
+    assertEquals("com.eygraber.date_input_view.xml_coroutines.test", appContext.packageName)
   }
 }

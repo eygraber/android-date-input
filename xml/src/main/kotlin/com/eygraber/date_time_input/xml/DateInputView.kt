@@ -1,4 +1,4 @@
-package com.eygraber.date_input.xml
+package com.eygraber.date_time_input.xml
 
 import android.content.Context
 import android.text.InputFilter
@@ -13,12 +13,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
-import com.eygraber.date_input.common.DateResult
-import com.eygraber.date_input.common.generateLocalizedMonthNames
+import com.eygraber.date_time_input.common.DateResult
+import com.eygraber.date_time_input.common.generateLocalizedMonthNames
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalDate
 import java.util.concurrent.CopyOnWriteArrayList
-import com.eygraber.date_input.common.R as commonR
+import com.eygraber.date_time_input.common.R as commonR
 
 internal class DateInputMonthView @JvmOverloads constructor(
   context: Context,

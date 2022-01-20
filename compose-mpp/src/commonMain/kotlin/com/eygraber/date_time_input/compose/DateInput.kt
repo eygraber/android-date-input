@@ -1,4 +1,4 @@
-package com.eygraber.date_input.compose
+package com.eygraber.date_time_input.compose
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
