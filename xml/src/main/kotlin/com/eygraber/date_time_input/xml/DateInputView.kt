@@ -162,7 +162,7 @@ class DateInputView @JvmOverloads constructor(
 
     styledAttr(attrs, R.styleable.DateInputView, R.attr.dateInputViewStyle) {
       val horizontalGap = getDimensionPixelSize(
-        R.styleable.DateInputView_date_input_view_horizontal_gap,
+        R.styleable.DateInputView_dateInputView_horizontalGap,
         -1
       )
       if(horizontalGap > -1) {
@@ -170,7 +170,7 @@ class DateInputView @JvmOverloads constructor(
       }
 
       val verticalGap = getDimensionPixelSize(
-        R.styleable.DateInputView_date_input_view_vertical_gap,
+        R.styleable.DateInputView_dateInputView_verticalGap,
         -1
       )
       if(verticalGap > -1) {
@@ -178,22 +178,22 @@ class DateInputView @JvmOverloads constructor(
       }
 
       flowView.setHorizontalBias(
-        getFloat(R.styleable.DateInputView_date_input_view_horizontal_bias, 0F)
+        getFloat(R.styleable.DateInputView_dateInputView_horizontalBias, 0F)
       )
 
       flowView.setVerticalBias(
-        getFloat(R.styleable.DateInputView_date_input_view_vertical_bias, 0F)
+        getFloat(R.styleable.DateInputView_dateInputView_verticalBias, 0F)
       )
 
       flowView.setHorizontalStyle(
-        getInt(R.styleable.DateInputView_date_input_view_flow_style, Flow.CHAIN_SPREAD_INSIDE)
+        getInt(R.styleable.DateInputView_dateInputView_flowStyle, Flow.CHAIN_SPREAD_INSIDE)
       )
 
       flowView.setHorizontalAlign(
-        getInt(R.styleable.DateInputView_date_input_view_flow_align, Flow.HORIZONTAL_ALIGN_START)
+        getInt(R.styleable.DateInputView_dateInputView_flowAlign, Flow.HORIZONTAL_ALIGN_START)
       )
 
-      getDimensionPixelSize(R.styleable.DateInputView_date_input_view_error_margin_start, -1).let { margin ->
+      getDimensionPixelSize(R.styleable.DateInputView_dateInputView_errorMarginStart, -1).let { margin ->
         if(margin >= 0) {
           errorView.updateLayoutParams<LayoutParams> {
             marginStart = margin
@@ -205,7 +205,7 @@ class DateInputView @JvmOverloads constructor(
         val monthNames =
           when(
             val resId =
-              getResourceId(R.styleable.DateInputView_date_input_view_month_names, -1)
+              getResourceId(R.styleable.DateInputView_dateInputView_monthNames, -1)
           ) {
             -1 -> generateLocalizedMonthNames()
             else -> resources.getStringArray(resId).toList()
