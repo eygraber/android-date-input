@@ -185,7 +185,7 @@ class TimeInputView @JvmOverloads constructor(
 
     styledAttr(attrs, R.styleable.TimeInputView, R.attr.timeInputViewStyle) {
       val horizontalGap = getDimensionPixelSize(
-        R.styleable.TimeInputView_time_input_view_horizontal_gap,
+        R.styleable.TimeInputView_timeInputView_horizontalGap,
         -1
       )
       if(horizontalGap > -1) {
@@ -193,7 +193,7 @@ class TimeInputView @JvmOverloads constructor(
       }
 
       val verticalGap = getDimensionPixelSize(
-        R.styleable.TimeInputView_time_input_view_vertical_gap,
+        R.styleable.TimeInputView_timeInputView_verticalGap,
         -1
       )
       if(verticalGap > -1) {
@@ -201,19 +201,19 @@ class TimeInputView @JvmOverloads constructor(
       }
 
       flowView.setHorizontalBias(
-        getFloat(R.styleable.TimeInputView_time_input_view_horizontal_bias, 0F)
+        getFloat(R.styleable.TimeInputView_timeInputView_horizontalBias, 0F)
       )
 
       flowView.setVerticalBias(
-        getFloat(R.styleable.TimeInputView_time_input_view_vertical_bias, 0F)
+        getFloat(R.styleable.TimeInputView_timeInputView_verticalBias, 0F)
       )
 
       flowView.setHorizontalAlign(
-        getInt(R.styleable.TimeInputView_time_input_view_flow_align, Flow.HORIZONTAL_ALIGN_START)
+        getInt(R.styleable.TimeInputView_timeInputView_flowAlign, Flow.HORIZONTAL_ALIGN_START)
       )
 
       val secondVisibility = when(
-        getInt(R.styleable.TimeInputView_time_input_view_second_visibility, View.VISIBLE)
+        getInt(R.styleable.TimeInputView_timeInputView_secondVisibility, View.VISIBLE)
       ) {
         0 -> View.VISIBLE
         1 -> View.INVISIBLE
@@ -223,7 +223,7 @@ class TimeInputView @JvmOverloads constructor(
       secondGroupView.visibility = secondVisibility
 
       getDimensionPixelSize(
-        R.styleable.TimeInputView_time_input_view_error_margin_start, -1
+        R.styleable.TimeInputView_timeInputView_errorMarginStart, -1
       ).let { margin ->
         if(margin >= 0) {
           errorView.updateLayoutParams<LayoutParams> {
