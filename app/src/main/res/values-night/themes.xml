@@ -14,11 +14,11 @@
     <!-- Customize your theme here. -->
   </style>
 
-  <style name="Widget.DateInputView.Outlined" parent="">
-    <item name="dateInputViewStyle">@style/Widget.DateInputView.Outlined.Actual</item>
+  <style name="Widget.DateTimeInput.Outlined" parent="">
+    <item name="dateInputViewStyle">@style/Widget.DateTimeInput.Outlined.Actual</item>
   </style>
 
-  <style name="Widget.DateInputView.Outlined.Actual" parent="">
+  <style name="Widget.DateTimeInput.Outlined.Actual" parent="">
     <item name="textInputStyle">?textInputOutlinedStyle</item>
     <item name="textInputExposedDropdownMenuStyle">?textInputOutlinedExposedDropdownMenuStyle</item>
   </style>

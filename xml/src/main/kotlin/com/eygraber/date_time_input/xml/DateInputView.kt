@@ -18,13 +18,12 @@ import com.eygraber.date_time_input.common.generateLocalizedMonthNames
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalDate
 import java.util.concurrent.CopyOnWriteArrayList
-import com.eygraber.date_time_input.common.R as commonR
 
 internal class DateInputMonthView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null
 ) : TextInputLayout(
-  context.createWrapper(R.attr.textInputExposedDropdownMenuStyle),
+  context.createDateInputWrapper(R.attr.textInputExposedDropdownMenuStyle),
   attrs
 )
 
@@ -32,7 +31,7 @@ internal class DateInputTextLayoutView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null
 ) : TextInputLayout(
-  context.createWrapper(R.attr.textInputStyle),
+  context.createDateInputWrapper(R.attr.textInputStyle),
   attrs
 )
 
@@ -194,19 +193,6 @@ class DateInputView @JvmOverloads constructor(
         getInt(R.styleable.DateInputView_date_input_view_flow_align, Flow.HORIZONTAL_ALIGN_START)
       )
 
-      monthContainerView.hint = getString(R.styleable.DateInputView_date_input_view_month_hint)
-        ?: context.getString(commonR.string.date_input_view_month_hint)
-
-      monthView.hint = getString(R.styleable.DateInputView_date_input_view_month_placeholder)
-        ?: context.getString(commonR.string.date_input_view_month_placeholder)
-
-      dayContainerView.hint = getString(R.styleable.DateInputView_date_input_view_day_hint)
-        ?: context.getString(commonR.string.date_input_view_day_hint)
-
-      yearContainerView.hint = getString(R.styleable.DateInputView_date_input_view_year_hint)
-        ?: context.getString(commonR.string.date_input_view_year_hint)
-
-      error = getString(R.styleable.DateInputView_date_input_view_error_text)
       getDimensionPixelSize(R.styleable.DateInputView_date_input_view_error_margin_start, -1).let { margin ->
         if(margin >= 0) {
           errorView.updateLayoutParams<LayoutParams> {
