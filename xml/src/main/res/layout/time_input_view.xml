@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  tools:paddingHorizontal="24dp"
+  tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+  <androidx.constraintlayout.helper.widget.Flow
+    android:id="@+id/time_flow"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:constraint_referenced_ids="hourContainer,hourMinuteDivider,minuteContainer,minuteSecondDivider,secondContainer,amPmContainer"
+    app:flow_horizontalStyle="packed"
+    app:flow_horizontalGap="4dp"
+    app:flow_wrapMode="chain" />
+
+  <com.eygraber.date_time_input.xml.TimeInputTextLayoutView
+    android:id="@+id/hourContainer"
+    style="?attr/textInputStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/hourMinuteDivider"
+    app:layout_constraintHorizontal_chainStyle="spread"
+    app:layout_constrainedWidth="true"
+    app:hintEnabled="false"
+    android:nextFocusForward="@+id/minuteContainer"
+    android:nextFocusDown="@+id/minuteContainer"
+    android:nextFocusRight="@+id/minuteContainer"
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/hour"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:imeOptions="actionNext"
+      android:textAlignment="center"
+      android:maxLength="2"
+      android:minEms="2"
+      android:maxEms="2"
+      android:importantForAutofill="no" />
+
+    <TextView
+      android:id="@+id/hourLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/time_input_view_hour_hint"
+      android:labelFor="@+id/hour"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
+  </com.eygraber.date_time_input.xml.TimeInputTextLayoutView>
+
+  <TextView
+    android:id="@+id/hourMinuteDivider"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    app:layout_constraintTop_toTopOf="@+id/hourContainer"
+    app:layout_constraintStart_toEndOf="@+id/hourContainer"
+    app:layout_constraintEnd_toStartOf="@+id/minuteContainer"
+    app:layout_constraintBottom_toBottomOf="@+id/hourContainer"
+    android:lineSpacingExtra="0dp"
+    android:textSize="56dp"
+    android:text="@string/time_input_view_divider"
+    android:importantForAccessibility="no"
+    android:includeFontPadding="false"
+    android:maxEms="1"
+    tools:ignore="SpUsage" />
+
+  <com.eygraber.date_time_input.xml.TimeInputTextLayoutView
+    android:id="@+id/minuteContainer"
+    style="?attr/textInputStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/hourMinuteDivider"
+    app:layout_constraintEnd_toStartOf="@+id/minuteSecondDivider"
+    app:layout_constrainedWidth="true"
+    app:hintEnabled="false"
+    android:nextFocusLeft="@+id/hourContainer"
+    android:nextFocusUp="@+id/hourContainer"
+    android:nextFocusForward="@+id/secondContainer"
+    android:nextFocusDown="@+id/secondContainer"
+    android:nextFocusRight="@+id/secondContainer"
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/minute"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:imeOptions="actionNext"
+      android:textAlignment="center"
+      android:maxLength="2"
+      android:minEms="2"
+      android:maxEms="2"
+      android:importantForAutofill="no" />
+
+    <TextView
+      android:id="@+id/minuteLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/time_input_view_minute_hint"
+      android:labelFor="@+id/minute"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
+  </com.eygraber.date_time_input.xml.TimeInputTextLayoutView>
+
+  <androidx.constraintlayout.widget.Group
+    android:id="@+id/secondGroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    tools:visibility="visible"
+    app:constraint_referenced_ids="minuteSecondDivider,secondContainer,second" />
+
+  <TextView
+    android:id="@+id/minuteSecondDivider"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    app:layout_constraintTop_toTopOf="@+id/minuteContainer"
+    app:layout_constraintStart_toEndOf="@+id/minuteContainer"
+    app:layout_constraintEnd_toStartOf="@+id/secondContainer"
+    app:layout_constraintBottom_toBottomOf="@+id/minuteContainer"
+    android:lineSpacingExtra="0dp"
+    android:textSize="56dp"
+    android:text="@string/time_input_view_divider"
+    android:importantForAccessibility="no"
+    android:includeFontPadding="false"
+    android:maxEms="1"
+    tools:ignore="SpUsage" />
+
+  <com.eygraber.date_time_input.xml.TimeInputTextLayoutView
+    android:id="@+id/secondContainer"
+    style="?attr/textInputStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/minuteSecondDivider"
+    app:layout_constraintEnd_toStartOf="@+id/amPmContainer"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constrainedWidth="true"
+    app:hintEnabled="false"
+    android:nextFocusLeft="@+id/minuteContainer"
+    android:nextFocusUp="@+id/minuteContainer"
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/second"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:imeOptions="actionNext"
+      android:minEms="2"
+      android:maxEms="2"
+      android:textAlignment="center"
+      android:maxLength="2"
+      android:importantForAutofill="no" />
+
+    <TextView
+      android:id="@+id/secondLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/time_input_view_second_hint"
+      android:labelFor="@+id/second"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
+  </com.eygraber.date_time_input.xml.TimeInputTextLayoutView>
+
+  <com.google.android.material.button.MaterialButtonToggleGroup
+    android:id="@+id/amPmContainer"
+    android:layout_width="52dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="@+id/hourContainer"
+    app:layout_constraintStart_toEndOf="@+id/secondContainer"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@+id/hourContainer"
+    android:visibility="visible"
+    android:orientation="vertical"
+    tools:visibility="visible"
+    app:checkedButton="@id/amView"
+    app:selectionRequired="true"
+    app:singleSelection="true">
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/amView"
+      style="?attr/materialButtonOutlinedStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="0dp"
+      android:textAppearance="?attr/textAppearanceSubtitle2"
+      android:text="@string/time_input_view_am"
+      android:insetBottom="0dp"
+      android:textAlignment="center"
+      android:insetTop="8dp"
+      app:shapeAppearanceOverlay="?attr/shapeAppearanceMediumComponent" />
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/pmView"
+      style="?attr/materialButtonOutlinedStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="0dp"
+      android:textAppearance="?attr/textAppearanceSubtitle2"
+      android:text="@string/time_input_view_pm"
+      android:textAlignment="center"
+      android:insetTop="0dp"
+      android:insetBottom="8dp"
+      app:shapeAppearanceOverlay="?attr/shapeAppearanceMediumComponent" />
+
+  </com.google.android.material.button.MaterialButtonToggleGroup>
+
+  <TextView
+    android:id="@+id/error"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/time_flow"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginStart="16dp"
+    android:textAppearance="?attr/textAppearanceCaption"
+    android:textColor="?colorError"
+    tools:text="Please enter a valid time" />
+</merge>

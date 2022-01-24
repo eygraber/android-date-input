@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <attr name="dateInputViewStyle" format="reference" />
+  <attr name="timeInputViewStyle" format="reference" />
   <attr name="textInputExposedDropdownMenuStyle" format="reference" />
 
   <declare-styleable name="DateInputView">
-    <attr name="date_input_view_month_hint" format="string" />
-    <attr name="date_input_view_month_placeholder" format="string" />
-    <attr name="date_input_view_day_hint" format="string" />
-    <attr name="date_input_view_year_hint" format="string" />
-
-    <attr name="date_input_view_error_text" format="string" />
-
     <attr name="date_input_view_error_margin_start" format="dimension" />
 
     <attr name="date_input_view_month_names" format="reference" />
@@ -32,5 +26,27 @@
 
     <attr name="date_input_view_horizontal_gap" format="dimension" />
     <attr name="date_input_view_vertical_gap" format="dimension" />
+  </declare-styleable>
+
+  <declare-styleable name="TimeInputView">
+    <attr name="time_input_view_second_visibility" format="enum">
+      <enum name="visible" value="0"/>
+      <enum name="invisible" value="1"/>
+      <enum name="gone" value="2"/>
+    </attr>
+
+    <attr name="time_input_view_error_margin_start" format="dimension" />
+
+    <attr name="time_input_view_flow_align" format="enum">
+      <enum name="start" value="0"/>
+      <enum name="end" value="1"/>
+      <enum name="center" value="2"/>
+    </attr>
+
+    <attr name="time_input_view_horizontal_bias" format="float" />
+    <attr name="time_input_view_vertical_bias" format="float" />
+
+    <attr name="time_input_view_horizontal_gap" format="dimension" />
+    <attr name="time_input_view_vertical_gap" format="dimension" />
   </declare-styleable>
 </resources>

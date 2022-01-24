@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="Widget.DateInputView" parent="">
+  <style name="Widget.DateTimeInput" parent="">
     <item name="textInputStyle">?textInputStyle</item>
     <item name="textInputExposedDropdownMenuStyle">?textInputFilledExposedDropdownMenuStyle</item>
+  </style>
+
+  <style name="Widget.DateTimeInput.EmptyError">
+    <item name="android:textSize">0sp</item>
   </style>
 </resources>

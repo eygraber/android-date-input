@@ -28,19 +28,28 @@
     app:layout_constraintEnd_toStartOf="@+id/dayContainer"
     app:layout_constraintHorizontal_chainStyle="spread"
     app:layout_constrainedWidth="true"
-    tools:hint="@string/date_input_view_month_hint"
+    app:hintEnabled="false"
     android:nextFocusForward="@+id/dayContainer"
     android:nextFocusDown="@+id/dayContainer"
     android:nextFocusRight="@+id/dayContainer"
-    app:errorIconDrawable="@null"
-    app:expandedHintEnabled="false">
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
 
     <com.google.android.material.textfield.MaterialAutoCompleteTextView
       android:id="@+id/month"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:inputType="none" />
+
+    <TextView
+      android:id="@+id/monthLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:inputType="none"
-      tools:hint="@string/date_input_view_month_placeholder" />
+      android:text="@string/date_input_view_month_hint"
+      android:labelFor="@+id/month"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
 
   </com.eygraber.date_time_input.xml.DateInputMonthView>
 
@@ -53,25 +62,37 @@
     app:layout_constraintStart_toEndOf="@+id/monthContainer"
     app:layout_constraintEnd_toStartOf="@+id/yearContainer"
     app:layout_constrainedWidth="true"
-    android:minWidth="60dp"
-    tools:hint="@string/date_input_view_day_hint"
+    app:hintEnabled="false"
     android:nextFocusLeft="@+id/monthContainer"
     android:nextFocusUp="@+id/monthContainer"
     android:nextFocusForward="@+id/yearContainer"
     android:nextFocusDown="@+id/yearContainer"
     android:nextFocusRight="@+id/yearContainer"
-    app:errorIconDrawable="@null"
-    app:expandedHintEnabled="false">
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/day"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:inputType="numberDecimal"
       android:imeOptions="actionNext"
       tools:text="1"
+      android:textAlignment="center"
       android:maxLength="2"
+      android:minEms="2"
+      android:maxEms="2"
       android:importantForAutofill="no" />
+
+    <TextView
+      android:id="@+id/dayLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/date_input_view_day_hint"
+      android:labelFor="@+id/day"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
   </com.eygraber.date_time_input.xml.DateInputTextLayoutView>
 
   <com.eygraber.date_time_input.xml.DateInputTextLayoutView
@@ -83,29 +104,41 @@
     app:layout_constraintStart_toEndOf="@+id/dayContainer"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constrainedWidth="true"
-    android:minWidth="77dp"
-    tools:hint="@string/date_input_view_year_hint"
+    app:hintEnabled="false"
     android:nextFocusLeft="@+id/dayContainer"
     android:nextFocusUp="@+id/dayContainer"
-    app:errorIconDrawable="@null"
-    app:expandedHintEnabled="false">
+    app:errorTextAppearance="@style/Widget.DateTimeInput.EmptyError"
+    app:errorIconDrawable="@null">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/year"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:inputType="numberDecimal"
       android:imeOptions="actionNext"
       tools:text="1996"
+      android:textAlignment="center"
       android:maxLength="4"
+      android:minEms="4"
+      android:maxEms="4"
       android:importantForAutofill="no" />
+
+    <TextView
+      android:id="@+id/yearLabel"
+      style="?attr/textAppearanceCaption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/date_input_view_year_hint"
+      android:labelFor="@+id/year"
+      android:focusable="false"
+      tools:ignore="LabelFor" />
   </com.eygraber.date_time_input.xml.DateInputTextLayoutView>
 
   <TextView
     android:id="@+id/error"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/date_flow"
+    app:layout_constraintTop_toBottomOf="@+id/time_flow"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     android:layout_marginStart="16dp"

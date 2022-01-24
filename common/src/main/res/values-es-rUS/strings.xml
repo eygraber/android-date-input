@@ -9,6 +9,6 @@
   <string name="time_input_view_minute_hint">Minuto</string>
   <string name="time_input_view_second_hint">Segundo</string>
 
-  <string name="time_input_view_am">AM</string>
-  <string name="time_input_view_pm">PM</string>
+  <string name="time_input_view_am">a.m.</string>
+  <string name="time_input_view_pm">p.m.</string>
 </resources>

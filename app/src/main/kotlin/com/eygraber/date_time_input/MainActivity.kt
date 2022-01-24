@@ -16,18 +16,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import com.eygraber.date_time_input.common.DateResult
+import com.eygraber.date_time_input.common.TimeResult
 import com.eygraber.date_time_input.compose.DateInput
 import com.eygraber.date_time_input.compose.DateInputHolder
 import com.eygraber.date_time_input.compose.DateInputStyle
 import com.eygraber.date_time_input.xml.DateInputView
+import com.eygraber.date_time_input.xml.TimeInputView
 import com.google.android.material.composethemeadapter.MdcTheme
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 class MainActivity : AppCompatActivity() {
-  private val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+  private val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+  private val timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
 
   private val minDate = LocalDate.of(1950, Month.JANUARY, 1)
   private val maxDate = LocalDate.of(2050, Month.JANUARY, 1)
@@ -38,7 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     configureDateInputView(R.id.date_input_view)
 
+    configureTimeInputView(R.id.time_input_view)
+
     configureDateInputView(R.id.outlined_date_input_view)
+
+    configureTimeInputView(R.id.outlined_time_input_view)
 
     findViewById<ComposeView>(R.id.date_input_composable).setContent {
       MdcTheme {
@@ -58,7 +66,17 @@ class MainActivity : AppCompatActivity() {
       view.maxDate = maxDate
 
       view.addOnDateChangedListener { dateResult ->
-        view.error = dateResult.calculateError(formatter)
+        view.error = dateResult.calculateError(dateFormatter)
+      }
+    }
+  }
+
+  private fun configureTimeInputView(@IdRes id: Int) {
+    findViewById<TimeInputView>(id).let { view ->
+      view.selectedTime = LocalTime.now()
+
+      view.addOnTimeChangedListener { timeResult ->
+        view.error = timeResult.calculateError(timeFormatter)
       }
     }
   }
@@ -89,7 +107,7 @@ class MainActivity : AppCompatActivity() {
       modifier = modifier,
       style = style
     ) { dateResult ->
-      error = dateResult.calculateError(formatter)
+      error = dateResult.calculateError(dateFormatter)
     }
   }
 }
@@ -108,4 +126,18 @@ private fun DateResult.calculateError(formatter: DateTimeFormatter) = when(this)
   DateResult.RequiresMonth -> null
   DateResult.RequiresDay -> null
   DateResult.RequiresYear -> null
+}
+
+private fun TimeResult.calculateError(formatter: DateTimeFormatter) = when(this) {
+  is TimeResult.Success -> null
+  is TimeResult.Error -> error.message
+
+  is TimeResult.ViolatedMaxTime ->
+    "${time.format(formatter)} needs to be less than ${maxTime.format(formatter)}"
+  is TimeResult.ViolatedMinTime ->
+    "${time.format(formatter)} needs to be greater than ${minTime.format(formatter)}"
+
+  TimeResult.RequiresHour -> null
+  TimeResult.RequiresMinute -> null
+  TimeResult.RequiresSecond -> null
 }
