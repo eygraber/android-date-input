@@ -1,12 +1,17 @@
+@file:SuppressLint("SetTextI18n")
+
 package com.eygraber.date_time_input.xml
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Editable
 import android.text.InputFilter
 import android.text.Spanned
 import android.text.format.DateFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.helper.widget.Flow
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -62,6 +67,8 @@ class TimeInputView @JvmOverloads constructor(
   private val hourFilter = MaxInputFilter(if(is24HourTime) 23 else 12)
   private val sixtyFilter = MaxInputFilter(59)
 
+  private var padLeadingZero = true
+
   val selectedTimeResult: TimeResult
     get() = TimeResult.calculateResult(
       minTime = minTime,
@@ -99,10 +106,20 @@ class TimeInputView @JvmOverloads constructor(
             value.hour % 12 == 0 -> 12
             value.hour >= 12 -> value.hour - 12
             else -> value.hour
-          }.toString()
-          hourView.text = hourDisplay
-          minuteView.text = value.minute.toString()
-          secondView.text = value.second.toString()
+          }
+
+          hourView.text = when {
+            padLeadingZero -> "%02d".format(hourDisplay)
+            else -> hourDisplay.toString()
+          }
+          minuteView.text = when {
+            padLeadingZero -> "%02d".format(value.minute)
+            else -> value.minute.toString()
+          }
+          secondView.text = when {
+            padLeadingZero -> "%02d".format(value.second)
+            else -> value.second.toString()
+          }
         }
       }
       finally {
@@ -141,6 +158,23 @@ class TimeInputView @JvmOverloads constructor(
     }
   }
 
+  private val afterTextChangedListener = { _: Editable? ->
+    notifyTimeChangedListeners()
+  }
+
+  private fun EditText.padOnFocusLost() {
+    setOnFocusChangeListener { _, hasFocus ->
+      if(!hasFocus) {
+        if(text.length == 1) {
+          text.toString().toIntOrNull()?.let { digit ->
+            setText("0$digit")
+            setSelection(2)
+          }
+        }
+      }
+    }
+  }
+
   init {
     LayoutInflater
       .from(context)
@@ -151,28 +185,28 @@ class TimeInputView @JvmOverloads constructor(
     minuteContainerView = findViewById(R.id.minuteContainer)
     secondContainerView = findViewById(R.id.secondContainer)
 
-    hourView = findViewById<TextView>(R.id.hour).apply {
+    hourView = findViewById<EditText>(R.id.hour).apply {
       filters += hourFilter
 
-      doAfterTextChanged {
-        notifyTimeChangedListeners()
-      }
+      doAfterTextChanged(afterTextChangedListener)
+
+      if(padLeadingZero) padOnFocusLost()
     }
 
-    minuteView = findViewById<TextView>(R.id.minute).apply {
+    minuteView = findViewById<EditText>(R.id.minute).apply {
       filters += sixtyFilter
 
-      doAfterTextChanged {
-        notifyTimeChangedListeners()
-      }
+      doAfterTextChanged(afterTextChangedListener)
+
+      if(padLeadingZero) padOnFocusLost()
     }
 
-    secondView = findViewById<TextView>(R.id.second).apply {
+    secondView = findViewById<EditText>(R.id.second).apply {
       filters += sixtyFilter
 
-      doAfterTextChanged {
-        notifyTimeChangedListeners()
-      }
+      doAfterTextChanged(afterTextChangedListener)
+
+      if(padLeadingZero) padOnFocusLost()
     }
 
     secondGroupView = findViewById(R.id.secondGroup)
@@ -231,6 +265,8 @@ class TimeInputView @JvmOverloads constructor(
           }
         }
       }
+
+      padLeadingZero = getBoolean(R.styleable.TimeInputView_timeInputView_padLeadingZero, true)
     }
   }
 
