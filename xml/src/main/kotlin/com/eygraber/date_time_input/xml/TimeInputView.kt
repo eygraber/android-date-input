@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.constraintlayout.helper.widget.Flow
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
@@ -68,6 +69,15 @@ class TimeInputView @JvmOverloads constructor(
   private val sixtyFilter = MaxInputFilter(59)
 
   private var padLeadingZero = true
+
+  override fun setEnabled(enabled: Boolean) {
+    super.setEnabled(enabled)
+    hourContainerView.isEnabled = enabled
+    minuteContainerView.isEnabled = enabled
+    secondContainerView.isEnabled = enabled
+    amPmContainerView.isEnabled = enabled
+    amPmContainerView.children.forEach { it.isEnabled = enabled }
+  }
 
   val selectedTimeResult: TimeResult
     get() = TimeResult.calculateResult(
@@ -218,6 +228,9 @@ class TimeInputView @JvmOverloads constructor(
     errorView = findViewById(R.id.error)
 
     styledAttr(attrs, R.styleable.TimeInputView, R.attr.timeInputViewStyle) {
+      val enabled = getBoolean(R.styleable.DateInputView_android_enabled, true)
+      isEnabled = enabled
+
       val horizontalGap = getDimensionPixelSize(
         R.styleable.TimeInputView_timeInputView_horizontalGap,
         -1

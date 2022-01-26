@@ -5,6 +5,8 @@
   <attr name="textInputExposedDropdownMenuStyle" format="reference" />
 
   <declare-styleable name="DateInputView">
+    <attr name="android:enabled" format="boolean" />
+
     <attr name="dateInputView_errorMarginStart" format="dimension" />
 
     <attr name="dateInputView_monthNames" format="reference" />
@@ -29,6 +31,8 @@
   </declare-styleable>
 
   <declare-styleable name="TimeInputView">
+    <attr name="android:enabled" format="boolean" />
+
     <attr name="timeInputView_secondVisibility" format="enum">
       <enum name="visible" value="0"/>
       <enum name="invisible" value="1"/>

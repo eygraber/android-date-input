@@ -56,6 +56,13 @@ class DateInputView @JvmOverloads constructor(
 
   private var selectedMonth = INVALID_MONTH
 
+  override fun setEnabled(enabled: Boolean) {
+    super.setEnabled(enabled)
+    monthContainerView.isEnabled = enabled
+    dayContainerView.isEnabled = enabled
+    yearContainerView.isEnabled = enabled
+  }
+
   val selectedDateResult: DateResult
     get() = DateResult.calculateResult(
       minDate = minDate,
@@ -161,6 +168,9 @@ class DateInputView @JvmOverloads constructor(
     errorView = findViewById(R.id.error)
 
     styledAttr(attrs, R.styleable.DateInputView, R.attr.dateInputViewStyle) {
+      val enabled = getBoolean(R.styleable.DateInputView_android_enabled, true)
+      isEnabled = enabled
+
       val horizontalGap = getDimensionPixelSize(
         R.styleable.DateInputView_dateInputView_horizontalGap,
         -1
