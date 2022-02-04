@@ -26,7 +26,7 @@ kotlin = "1.6.10"
 
 kotlinx-coroutines = "1.6.0"
 
-versionPlugin = "0.41.0"
+versionPlugin = "0.42.0"
 
 [plugins]
 androidApp = { id = "com.android.application", version.ref = "android-plugin" }
