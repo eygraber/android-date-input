@@ -47,7 +47,7 @@
       style="?attr/textAppearanceCaption"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/date_input_view_month_hint"
+      tools:text="@string/date_input_view_month_label"
       android:labelFor="@+id/month"
       android:focusable="false"
       tools:ignore="LabelFor" />
@@ -90,7 +90,7 @@
       style="?attr/textAppearanceCaption"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/date_input_view_day_hint"
+      tools:text="@string/date_input_view_day_label"
       android:labelFor="@+id/day"
       android:focusable="false"
       tools:ignore="LabelFor" />
@@ -129,7 +129,7 @@
       style="?attr/textAppearanceCaption"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/date_input_view_year_hint"
+      tools:text="@string/date_input_view_year_label"
       android:labelFor="@+id/year"
       android:focusable="false"
       tools:ignore="LabelFor" />

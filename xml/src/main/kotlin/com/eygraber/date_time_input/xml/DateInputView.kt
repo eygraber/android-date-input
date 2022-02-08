@@ -46,15 +46,36 @@ class DateInputView @JvmOverloads constructor(
   private val flowView: Flow
   private val monthContainerView: TextInputLayout
   private val monthView: AutoCompleteTextView
+  private val monthLabelView: TextView
   private val dayContainerView: TextInputLayout
   private val dayView: TextView
+  private val dayLabelView: TextView
   private val yearContainerView: TextInputLayout
   private val yearView: TextView
+  private val yearLabelView: TextView
   private val errorView: TextView
 
   private val dateChangedListeners = CopyOnWriteArrayList<OnDateChangedListener>()
 
   private var selectedMonth = INVALID_MONTH
+
+  var monthLabel: CharSequence
+    get() = monthLabelView.text
+    set(value) {
+      monthLabelView.text = value
+    }
+
+  var dayLabel: CharSequence
+    get() = dayLabelView.text
+    set(value) {
+      dayLabelView.text = value
+    }
+
+  var yearLabel: CharSequence
+    get() = yearLabelView.text
+    set(value) {
+      yearLabelView.text = value
+    }
 
   override fun setEnabled(enabled: Boolean) {
     super.setEnabled(enabled)
@@ -142,14 +163,16 @@ class DateInputView @JvmOverloads constructor(
     dayContainerView = findViewById(R.id.dayContainer)
     yearContainerView = findViewById(R.id.yearContainer)
 
-    monthView = findViewById<AutoCompleteTextView>(R.id.month).apply {
+    monthView = monthContainerView.findViewById<AutoCompleteTextView>(R.id.month).apply {
       onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
         selectedMonth = position + 1
         notifyDateChangedListeners()
       }
     }
 
-    dayView = findViewById<TextView>(R.id.day).apply {
+    monthLabelView = monthContainerView.findViewById(R.id.monthLabel)
+
+    dayView = dayContainerView.findViewById<TextView>(R.id.day).apply {
       filters += OnlyDigitsFilter
 
       doAfterTextChanged {
@@ -157,13 +180,17 @@ class DateInputView @JvmOverloads constructor(
       }
     }
 
-    yearView = findViewById<TextView>(R.id.year).apply {
+    dayLabelView = dayContainerView.findViewById(R.id.dayLabel)
+
+    yearView = yearContainerView.findViewById<TextView>(R.id.year).apply {
       filters += OnlyDigitsFilter
 
       doAfterTextChanged {
         notifyDateChangedListeners()
       }
     }
+
+    yearLabelView = yearContainerView.findViewById(R.id.yearLabel)
 
     errorView = findViewById(R.id.error)
 
@@ -202,6 +229,15 @@ class DateInputView @JvmOverloads constructor(
       flowView.setHorizontalAlign(
         getInt(R.styleable.DateInputView_dateInputView_flowAlign, Flow.HORIZONTAL_ALIGN_START)
       )
+
+      monthLabelView.text = getString(R.styleable.DateInputView_dateInputView_monthLabel)
+        ?: resources.getString(R.string.date_input_view_month_label)
+
+      dayLabelView.text = getString(R.styleable.DateInputView_dateInputView_dayLabel)
+        ?: resources.getString(R.string.date_input_view_day_label)
+
+      yearLabelView.text = getString(R.styleable.DateInputView_dateInputView_yearLabel)
+        ?: resources.getString(R.string.date_input_view_year_label)
 
       getDimensionPixelSize(R.styleable.DateInputView_dateInputView_errorMarginStart, -1).let { margin ->
         if(margin >= 0) {

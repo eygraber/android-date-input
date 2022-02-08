@@ -7,6 +7,10 @@
   <declare-styleable name="DateInputView">
     <attr name="android:enabled" format="boolean" />
 
+    <attr name="dateInputView_monthLabel" format="string" />
+    <attr name="dateInputView_dayLabel" format="string" />
+    <attr name="dateInputView_yearLabel" format="string" />
+
     <attr name="dateInputView_errorMarginStart" format="dimension" />
 
     <attr name="dateInputView_monthNames" format="reference" />
@@ -38,6 +42,12 @@
       <enum name="invisible" value="1"/>
       <enum name="gone" value="2"/>
     </attr>
+
+    <attr name="timeInputView_hourLabel" format="string" />
+    <attr name="timeInputView_minuteLabel" format="string" />
+    <attr name="timeInputView_secondLabel" format="string" />
+    <attr name="timeInputView_amLabel" format="string" />
+    <attr name="timeInputView_pmLabel" format="string" />
 
     <attr name="timeInputView_errorMarginStart" format="dimension" />
 
