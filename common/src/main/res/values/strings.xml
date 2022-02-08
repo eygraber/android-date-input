@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="date_input_view_month_hint">Month</string>
+  <string name="date_input_view_month_label">Month</string>
   <string name="date_input_view_month_placeholder">Select month</string>
-  <string name="date_input_view_day_hint">Day</string>
-  <string name="date_input_view_year_hint">Year</string>
+  <string name="date_input_view_day_label">Day</string>
+  <string name="date_input_view_year_label">Year</string>
 
-  <string name="time_input_view_hour_hint">Hour</string>
-  <string name="time_input_view_minute_hint">Minute</string>
-  <string name="time_input_view_second_hint">Second</string>
+  <string name="time_input_view_hour_label">Hour</string>
+  <string name="time_input_view_minute_label">Minute</string>
+  <string name="time_input_view_second_label">Second</string>
 
   <string name="time_input_view_am">AM</string>
   <string name="time_input_view_pm">PM</string>

@@ -19,13 +19,13 @@ internal val defaultHorizontalSpacing = 16.dp
 internal val defaultVerticalSpacing = 8.dp
 
 internal val defaultMonthLabel = @Composable {
-  Text(text = stringResource(id = R.string.date_input_view_month_hint))
+  Text(text = stringResource(id = R.string.date_input_view_month_label))
 }
 
 internal val defaultDayLabel = @Composable {
-  Text(text = stringResource(id = R.string.date_input_view_day_hint))
+  Text(text = stringResource(id = R.string.date_input_view_day_label))
 }
 
 internal val defaultYearLabel = @Composable {
-  Text(text = stringResource(id = R.string.date_input_view_year_hint))
+  Text(text = stringResource(id = R.string.date_input_view_year_label))
 }

@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
 import com.eygraber.date_time_input.common.TimeResult
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalTime
@@ -53,12 +54,17 @@ class TimeInputView @JvmOverloads constructor(
   private val flowView: Flow
   private val hourContainerView: TextInputLayout
   private val hourView: TextView
+  private val hourLabelView: TextView
   private val minuteContainerView: TextInputLayout
   private val minuteView: TextView
+  private val minuteLabelView: TextView
   private val secondContainerView: TextInputLayout
   private val secondView: TextView
+  private val secondLabelView: TextView
   private val secondGroupView: Group
   private val amPmContainerView: MaterialButtonToggleGroup
+  private val amView: MaterialButton
+  private val pmView: MaterialButton
   private val errorView: TextView
 
   private val timeChangedListeners = CopyOnWriteArrayList<OnTimeChangedListener>()
@@ -69,6 +75,36 @@ class TimeInputView @JvmOverloads constructor(
   private val sixtyFilter = MaxInputFilter(59)
 
   private var padLeadingZero = true
+
+  var hourLabel: CharSequence
+    get() = hourLabelView.text
+    set(value) {
+      hourLabelView.text = value
+    }
+
+  var minuteLabel: CharSequence
+    get() = minuteLabelView.text
+    set(value) {
+      minuteLabelView.text = value
+    }
+
+  var secondLabel: CharSequence
+    get() = secondLabelView.text
+    set(value) {
+      secondLabelView.text = value
+    }
+
+  var amLabel: CharSequence
+    get() = amView.text
+    set(value) {
+      amView.text = value
+    }
+
+  var pmLabel: CharSequence
+    get() = pmView.text
+    set(value) {
+      pmView.text = value
+    }
 
   override fun setEnabled(enabled: Boolean) {
     super.setEnabled(enabled)
@@ -195,7 +231,7 @@ class TimeInputView @JvmOverloads constructor(
     minuteContainerView = findViewById(R.id.minuteContainer)
     secondContainerView = findViewById(R.id.secondContainer)
 
-    hourView = findViewById<EditText>(R.id.hour).apply {
+    hourView = hourContainerView.findViewById<EditText>(R.id.hour).apply {
       filters += hourFilter
 
       doAfterTextChanged(afterTextChangedListener)
@@ -203,7 +239,9 @@ class TimeInputView @JvmOverloads constructor(
       if(padLeadingZero) padOnFocusLost()
     }
 
-    minuteView = findViewById<EditText>(R.id.minute).apply {
+    hourLabelView = hourContainerView.findViewById(R.id.hourLabel)
+
+    minuteView = minuteContainerView.findViewById<EditText>(R.id.minute).apply {
       filters += sixtyFilter
 
       doAfterTextChanged(afterTextChangedListener)
@@ -211,19 +249,26 @@ class TimeInputView @JvmOverloads constructor(
       if(padLeadingZero) padOnFocusLost()
     }
 
-    secondView = findViewById<EditText>(R.id.second).apply {
+    minuteLabelView = minuteContainerView.findViewById(R.id.minuteLabel)
+
+    secondView = secondContainerView.findViewById<EditText>(R.id.second).apply {
       filters += sixtyFilter
 
       doAfterTextChanged(afterTextChangedListener)
 
       if(padLeadingZero) padOnFocusLost()
     }
+
+    secondLabelView = secondContainerView.findViewById(R.id.secondLabel)
 
     secondGroupView = findViewById(R.id.secondGroup)
 
     amPmContainerView = findViewById<MaterialButtonToggleGroup>(R.id.amPmContainer).apply {
       isVisible = !is24HourTime
     }
+
+    amView = amPmContainerView.findViewById(R.id.amView)
+    pmView = amPmContainerView.findViewById(R.id.pmView)
 
     errorView = findViewById(R.id.error)
 
@@ -268,6 +313,21 @@ class TimeInputView @JvmOverloads constructor(
       }
 
       secondGroupView.visibility = secondVisibility
+
+      hourLabelView.text = getString(R.styleable.TimeInputView_timeInputView_hourLabel)
+        ?: context.getString(R.string.time_input_view_hour_label)
+
+      minuteLabelView.text = getString(R.styleable.TimeInputView_timeInputView_minuteLabel)
+        ?: context.getString(R.string.time_input_view_minute_label)
+
+      secondLabelView.text = getString(R.styleable.TimeInputView_timeInputView_secondLabel)
+        ?: context.getString(R.string.time_input_view_second_label)
+
+      amView.text = getString(R.styleable.TimeInputView_timeInputView_amLabel)
+        ?: context.getString(R.string.time_input_view_am)
+
+      pmView.text = getString(R.styleable.TimeInputView_timeInputView_pmLabel)
+        ?: context.getString(R.string.time_input_view_pm)
 
       getDimensionPixelSize(
         R.styleable.TimeInputView_timeInputView_errorMarginStart, -1
