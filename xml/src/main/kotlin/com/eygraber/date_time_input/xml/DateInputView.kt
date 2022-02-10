@@ -15,6 +15,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
 import com.eygraber.date_time_input.common.DateResult
 import com.eygraber.date_time_input.common.generateLocalizedMonthNames
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalDate
 import java.util.concurrent.CopyOnWriteArrayList
@@ -48,10 +49,10 @@ class DateInputView @JvmOverloads constructor(
   private val monthView: AutoCompleteTextView
   private val monthLabelView: TextView
   private val dayContainerView: TextInputLayout
-  private val dayView: TextView
+  private val dayView: TextInputEditText
   private val dayLabelView: TextView
   private val yearContainerView: TextInputLayout
-  private val yearView: TextView
+  private val yearView: TextInputEditText
   private val yearLabelView: TextView
   private val errorView: TextView
 
@@ -113,8 +114,10 @@ class DateInputView @JvmOverloads constructor(
             monthView.adapter.getItem(value.monthValue - 1).toString(),
             false
           )
-          dayView.text = value.dayOfMonth.toString()
-          yearView.text = value.year.toString()
+          dayView.setText(value.dayOfMonth.toString())
+          dayView.setSelection(dayView.length())
+          yearView.setText(value.year.toString())
+          yearView.setSelection(yearView.length())
         }
       }
       finally {
@@ -172,7 +175,7 @@ class DateInputView @JvmOverloads constructor(
 
     monthLabelView = monthContainerView.findViewById(R.id.monthLabel)
 
-    dayView = dayContainerView.findViewById<TextView>(R.id.day).apply {
+    dayView = dayContainerView.findViewById<TextInputEditText>(R.id.day).apply {
       filters += OnlyDigitsFilter
 
       doAfterTextChanged {
@@ -182,7 +185,7 @@ class DateInputView @JvmOverloads constructor(
 
     dayLabelView = dayContainerView.findViewById(R.id.dayLabel)
 
-    yearView = yearContainerView.findViewById<TextView>(R.id.year).apply {
+    yearView = yearContainerView.findViewById<TextInputEditText>(R.id.year).apply {
       filters += OnlyDigitsFilter
 
       doAfterTextChanged {

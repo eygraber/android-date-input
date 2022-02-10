@@ -23,6 +23,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.eygraber.date_time_input.common.TimeResult
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.time.LocalTime
 import java.util.concurrent.CopyOnWriteArrayList
@@ -53,13 +54,13 @@ class TimeInputView @JvmOverloads constructor(
 
   private val flowView: Flow
   private val hourContainerView: TextInputLayout
-  private val hourView: TextView
+  private val hourView: TextInputEditText
   private val hourLabelView: TextView
   private val minuteContainerView: TextInputLayout
-  private val minuteView: TextView
+  private val minuteView: TextInputEditText
   private val minuteLabelView: TextView
   private val secondContainerView: TextInputLayout
-  private val secondView: TextView
+  private val secondView: TextInputEditText
   private val secondLabelView: TextView
   private val secondGroupView: Group
   private val amPmContainerView: MaterialButtonToggleGroup
@@ -154,18 +155,29 @@ class TimeInputView @JvmOverloads constructor(
             else -> value.hour
           }
 
-          hourView.text = when {
-            padLeadingZero -> "%02d".format(hourDisplay)
-            else -> hourDisplay.toString()
-          }
-          minuteView.text = when {
-            padLeadingZero -> "%02d".format(value.minute)
-            else -> value.minute.toString()
-          }
-          secondView.text = when {
-            padLeadingZero -> "%02d".format(value.second)
-            else -> value.second.toString()
-          }
+          hourView.setText(
+            when {
+              padLeadingZero -> "%02d".format(hourDisplay)
+              else -> hourDisplay.toString()
+            }
+          )
+          hourView.setSelection(hourView.length())
+
+          minuteView.setText(
+            when {
+              padLeadingZero -> "%02d".format(value.minute)
+              else -> value.minute.toString()
+            }
+          )
+          minuteView.setSelection(minuteView.length())
+
+          secondView.setText(
+            when {
+              padLeadingZero -> "%02d".format(value.second)
+              else -> value.second.toString()
+            }
+          )
+          secondView.setSelection(secondView.length())
         }
       }
       finally {
@@ -231,7 +243,7 @@ class TimeInputView @JvmOverloads constructor(
     minuteContainerView = findViewById(R.id.minuteContainer)
     secondContainerView = findViewById(R.id.secondContainer)
 
-    hourView = hourContainerView.findViewById<EditText>(R.id.hour).apply {
+    hourView = hourContainerView.findViewById<TextInputEditText>(R.id.hour).apply {
       filters += hourFilter
 
       doAfterTextChanged(afterTextChangedListener)
@@ -241,7 +253,7 @@ class TimeInputView @JvmOverloads constructor(
 
     hourLabelView = hourContainerView.findViewById(R.id.hourLabel)
 
-    minuteView = minuteContainerView.findViewById<EditText>(R.id.minute).apply {
+    minuteView = minuteContainerView.findViewById<TextInputEditText>(R.id.minute).apply {
       filters += sixtyFilter
 
       doAfterTextChanged(afterTextChangedListener)
@@ -251,7 +263,7 @@ class TimeInputView @JvmOverloads constructor(
 
     minuteLabelView = minuteContainerView.findViewById(R.id.minuteLabel)
 
-    secondView = secondContainerView.findViewById<EditText>(R.id.second).apply {
+    secondView = secondContainerView.findViewById<TextInputEditText>(R.id.second).apply {
       filters += sixtyFilter
 
       doAfterTextChanged(afterTextChangedListener)
