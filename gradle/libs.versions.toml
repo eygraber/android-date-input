@@ -74,7 +74,7 @@ test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "
 test-junit = "androidx.test.ext:junit:1.1.4-alpha04"
 test-kotest = "io.kotest:kotest-assertions-core:5.1.0"
 test-robolectric = "org.robolectric:robolectric:4.7.3"
-test-mockk = "io.mockk:mockk:1.12.2"
+test-mockk = "io.mockk:mockk:1.12.3"
 test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
 
