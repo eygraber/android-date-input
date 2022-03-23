@@ -62,7 +62,7 @@ detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
 
-google-material = "com.google.android.material:material:1.6.0-alpha03"
+google-material = "com.google.android.material:material:1.6.0-beta01"
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
