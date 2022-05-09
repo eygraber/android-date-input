@@ -71,7 +71,7 @@ test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 test-espressoCore = "androidx.test.espresso:espresso-core:3.5.0-alpha06"
 test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-fragment" }
-test-junit = "androidx.test.ext:junit:1.1.4-alpha05"
+test-junit = "androidx.test.ext:junit:1.1.4-alpha06"
 test-kotest = "io.kotest:kotest-assertions-core:5.3.0"
 test-robolectric = "org.robolectric:robolectric:4.7.3"
 test-mockk = "io.mockk:mockk:1.12.3"
