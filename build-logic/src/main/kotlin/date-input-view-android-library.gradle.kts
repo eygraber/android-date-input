@@ -42,6 +42,14 @@ android {
     }
   }
 
+  publishing {
+    multipleVariants {
+      allVariants()
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
+
   dependencies {
     coreLibraryDesugaring(libs.android.desugar)
   }
