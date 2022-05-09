@@ -1,7 +1,7 @@
 plugins {
   id("com.android.application")
-  id("date-input-view-kotlin")
-  id("date-input-view-detekt")
+  id("date-time-input-kotlin")
+  id("date-time-input-detekt")
 }
 
 android {
