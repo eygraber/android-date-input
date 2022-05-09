@@ -24,7 +24,7 @@ jetpack-compose-compiler = "1.1.1"
 
 kotlin = "1.6.10"
 
-kotlinx-coroutines = "1.6.0"
+kotlinx-coroutines = "1.6.1"
 
 versionPlugin = "0.42.0"
 
