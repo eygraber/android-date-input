@@ -26,5 +26,27 @@ jobs:
       - name: Run checks
         run: ./gradlew check detektMain
 
+  validate_gradle_properties_match:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: gradle/wrapper-validation-action@v1.0.4
+
+      - name: Cache gradle
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - uses: actions/setup-java@v3
+        with:
+              java-version: 11
+              distribution: 'zulu'
+
+      - name: Validate that gradle property files are all equal
+        run: ./gradlew validateGradleProperties
+
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -XX:+UseCompressedOops -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"

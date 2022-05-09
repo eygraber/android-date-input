@@ -84,7 +84,9 @@ jobs:
 
       - name: Prepare next dev version
         id: prepare_next_dev
-        run: sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties
+        run: |
+          sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties && \
+            sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' build-logic/gradle.properties
 
       - name: Commit next dev version
         id: commit_next_dev
