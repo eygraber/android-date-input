@@ -10,6 +10,9 @@ pluginManagement {
     gradlePluginPortal()
     mavenCentral()
   }
+
+  @Suppress("UnstableApiUsage")
+  includeBuild("build-logic")
 }
 
 dependencyResolutionManagement {

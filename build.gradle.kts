@@ -4,6 +4,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 @Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
 plugins {
   alias(libs.plugins.versionsBenManes)
+  id("validate-gradle-properties")
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
