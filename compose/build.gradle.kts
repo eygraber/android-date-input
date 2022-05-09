@@ -1,7 +1,7 @@
 plugins {
-  id("date-input-view-android-library")
-  id("date-input-view-detekt")
-  id("date-input-view-publish")
+  id("date-time-input-android-library")
+  id("date-time-input-detekt")
+  id("date-time-input-publish")
 }
 
 android {
