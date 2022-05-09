@@ -19,7 +19,7 @@ internal fun DateInputText(
   minWidth: Dp,
   isError: Boolean
 ) {
-  val text = value?.toString() ?: ""
+  val text = value?.toString().orEmpty()
   val modifier = Modifier.width(minWidth)
 
   val onTextChange = { newText: String ->

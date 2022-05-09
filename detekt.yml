@@ -420,7 +420,7 @@ naming:
   NoNameShadowing:
     active: true
   NonBooleanPropertyPrefixedWithIs:
-    active: true
+    active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
   ObjectPropertyNaming:
     active: true
