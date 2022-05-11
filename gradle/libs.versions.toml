@@ -60,7 +60,7 @@ jetpack-compose-themeAdapter = { module = "com.google.android.material:compose-t
 jetpack-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "jetpack-compose" }
 
 buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "android-plugin" }
-buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.5.2" }
+buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.5.3" }
 buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-dokkaCore = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka" }
